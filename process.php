@@ -21,7 +21,7 @@
             fclose($fileHandle);
 
             // Redirect to a "Thank You" page after the details
-            header("Location: confirmation.html");
+            header("Location: index2.html");
             exit();
         } else {
             // Show an error if unable to open the file
@@ -29,7 +29,7 @@
         }
     } else {
         // Redirect to the payment page if accessed directly
-        header("Location: form.html");
+        header("Location: index.html");
         exit();
     }
 ?>
